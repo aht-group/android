@@ -10,12 +10,32 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //if multiDexEnabled false -> Android only allows 65536 Methods -> with meis-interface, meis-xml & expl-util more than 65536....
+        multiDexEnabled  true
+//       jackOptions {
+//           enabled true
+//        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        pickFirst  'META-INF/LICENSE'
+        pickFirst  'META-INF/ASL2.0'
+        pickFirst  'META-INF/INDEX.LIST'
+
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -24,15 +44,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:multidex:1.0.1'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
     /* Maven dependency adding to gradle:
         maven: <groupId>, <artifactId>, <version>
         gradle: 'groupId:artifactId:version'
-        */
-    compile 'org.jboss.resteasy.mobile:resteasy-mobile:1.0.0'
-    //    compile group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.1.0.Final'
-    //    compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.1.0.Final'
+    */
+    compile 'com.android.support:appcompat-v7:25.1.0'
+//    compile 'org.jboss.resteasy:resteasy-client:3.1.0.Final'
     compile 'org.rldsf:meis-interfaces:1.0.01-SNAPSHOT'
+    compile 'org.rldsf:meis-xml:1.0.01-SNAPSHOT'
     compile 'net.sf.exlp:exlp-util:0.1.12-SNAPSHOT'
+    compile 'com.android.support:design:25.1.0'
     androidTestCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
 }
