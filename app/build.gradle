@@ -30,11 +30,12 @@ dependencies {
         maven: <groupId>, <artifactId>, <version>
         gradle: 'groupId:artifactId:version'
         */
-    compile 'org.jboss.resteasy.mobile:resteasy-mobile:1.0.0'
+  //  compile 'org.jboss.resteasy.mobile:resteasy-mobile:1.0.0'
     //    compile group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.1.0.Final'
     //    compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.1.0.Final'
-    compile 'org.rldsf:meis-interfaces:1.0.01-SNAPSHOT'
-    compile 'net.sf.exlp:exlp-util:0.1.12-SNAPSHOT'
+   // compile 'org.rldsf:meis-interfaces:1.0.01-SNAPSHOT'
+   // compile 'net.sf.exlp:exlp-util:0.1.12-SNAPSHOT'
+    compile 'org.apache.commons:commons-collections4:4.1'
     androidTestCompile 'junit:junit:4.12'
     testCompile 'junit:junit:4.12'
 }
