@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+//noinspection GroovyMissingReturnStatement
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -35,4 +36,5 @@ dependencies {
     compile 'org.rldsf:meis-interfaces:1.0.01-SNAPSHOT'
     compile 'net.sf.exlp:exlp-util:0.1.12-SNAPSHOT'
     androidTestCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
 }
