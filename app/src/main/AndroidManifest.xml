@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aht.android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +29,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aht.android.QuestionListActivity" />
         </activity>
+        <activity
+            android:name=".rest.TestRestActivity"
+            android:label="@string/title_activity_test_rest"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
