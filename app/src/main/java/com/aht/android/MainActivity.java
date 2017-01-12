@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void testRest(View view) throws FileNotFoundException {
+    public void testRest(View view) throws Exception {
         RestConnection rc = new RestConnection();
         rc.connect();
         rc.saveProjectStatus();
