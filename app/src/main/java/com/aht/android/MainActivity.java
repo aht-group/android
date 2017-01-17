@@ -4,17 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
-import com.aht.android.rest.RestConnection;
-import com.aht.android.rest.TestRestActivity;
-
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.aht.android.masterDetail.*;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA = "nix.Extra";
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,20 +19,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testRest(View view) throws Exception {
-        RestConnection rc = new RestConnection();
-        rc.connect();
-        rc.saveProjectStatus();
+//        RestConnection rc = new RestConnection();
+//        rc.connect();
+//        rc.saveProjectStatus();
+//
+//        if(new File(RestConnection.HOME_DIR + RestConnection.FS + "status.xml").exists())
+//        {
+//            Intent intent = new Intent(this, TestRestActivity.class);
+//            intent.putExtra(EXTRA,/*rc.loadProjectStatus().get(0).getCode()*/ "Test");
+//            startActivity(intent);
+//        }
+//        else
+//        {
+//            TextView textView = (TextView)findViewById(R.id.textView);
+//            textView.setText(R.string.failed);
+//        }
+    }
 
-        if(new File(RestConnection.HOME_DIR + RestConnection.FS + "status.xml").exists())
-        {
-            Intent intent = new Intent(this, TestRestActivity.class);
-            intent.putExtra(EXTRA,/*rc.loadProjectStatus().get(0).getCode()*/ "Test");
-            startActivity(intent);
-        }
-        else
-        {
-            TextView textView = (TextView)findViewById(R.id.textView);
-            textView.setText(R.string.failed);
-        }
+    public void startSurvey(View view) {
+        startActivity(new Intent(getApplicationContext(), QuestionListActivity.class));
     }
 }

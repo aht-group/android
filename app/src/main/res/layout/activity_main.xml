@@ -26,5 +26,5 @@
         android:text="@string/title_activity_test_rest"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:onClick="testRest"/>
+        android:onClick="startSurvey"/>
 </RelativeLayout>

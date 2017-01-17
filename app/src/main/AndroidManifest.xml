@@ -17,17 +17,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuestionListActivity"
+            android:name=".masterDetail.QuestionListActivity"
             android:label="@string/title_question_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".QuestionDetailActivity"
+            android:name=".masterDetail.QuestionDetailActivity"
             android:label="@string/title_question_detail"
-            android:parentActivityName=".QuestionListActivity"
+            android:parentActivityName=".masterDetail.QuestionListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aht.android.QuestionListActivity" />
+                android:value="com.aht.android.masterDetail.QuestionListActivity" />
         </activity>
         <activity
             android:name=".rest.TestRestActivity"

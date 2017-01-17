@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.aht.android.QuestionListActivity"
+    tools:context="com.aht.android.masterDetail.QuestionListActivity"
     tools:listitem="@layout/question_list_content" />

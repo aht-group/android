@@ -1,4 +1,4 @@
-package com.aht.android;
+package com.aht.android.masterDetail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.aht.android.dummy.DummyContent;
+import com.aht.android.R;
+import com.aht.android.dummy.Content;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ import java.util.List;
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a {@link QuestionDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
+ * item answer. On tablets, the activity presents the list of items and
+ * item answer side-by-side using two vertical panes.
  */
 public class QuestionListActivity extends AppCompatActivity {
 
@@ -67,15 +68,15 @@ public class QuestionListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Content.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<Content.Item> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<Content.Item> items) {
             mValues = items;
         }
 
@@ -90,7 +91,7 @@ public class QuestionListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mContentView.setText(mValues.get(position).question);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -123,7 +124,7 @@ public class QuestionListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public Content.Item mItem;
 
             public ViewHolder(View view) {
                 super(view);

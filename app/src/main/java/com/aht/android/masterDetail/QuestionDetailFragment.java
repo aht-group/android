@@ -1,4 +1,4 @@
-package com.aht.android;
+package com.aht.android.masterDetail;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.aht.android.dummy.DummyContent;
+import com.aht.android.R;
+import com.aht.android.dummy.Content;
 
 /**
  * A fragment representing a single Question detail screen.
@@ -25,9 +26,9 @@ public class QuestionDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The dummy question this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Content.Item mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -41,15 +42,15 @@ public class QuestionDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
+            // Load the dummy question specified by the fragment
             // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            // to load question from a question provider.
+            mItem = Content.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.question);
             }
         }
     }
@@ -59,9 +60,9 @@ public class QuestionDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.question_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
+        // Show the dummy question as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.question_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.question_detail)).setText(mItem.answer);
         }
 
         return rootView;
