@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aht.android.R;
-import com.aht.android.dummy.Content;
+import com.aht.android.appContent.AppContent;
 
 /**
  * A fragment representing a single Question detail screen.
@@ -28,7 +28,7 @@ public class QuestionDetailFragment extends Fragment {
     /**
      * The dummy question this fragment is presenting.
      */
-    private Content.Item mItem;
+    private AppContent.Item mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -45,7 +45,7 @@ public class QuestionDetailFragment extends Fragment {
             // Load the dummy question specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load question from a question provider.
-            mItem = Content.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = AppContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);

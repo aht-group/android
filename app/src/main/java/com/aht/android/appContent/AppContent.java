@@ -1,4 +1,4 @@
-package com.aht.android.dummy;
+package com.aht.android.appContent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Helper class for providing questions for user interfaces
  */
-public class Content {
+public class AppContent {
 
     /**
      * An array of sample items.
@@ -53,11 +53,15 @@ public class Content {
     public static class Item {
         public final String id;
         public final String question;
-        public final String answer;
+        public String answer;
 
         public Item(String id, String question, String answer) {
             this.id = id;
             this.question = question;
+            this.answer = answer;
+        }
+
+        public void setAnswer(String answer) {
             this.answer = answer;
         }
 
