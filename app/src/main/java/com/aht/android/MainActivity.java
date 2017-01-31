@@ -21,7 +21,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA = "nix.Extra";
-    private boolean mTwoPane;
     private List<Question> questions;
 
     @Override
@@ -53,13 +52,12 @@ public class MainActivity extends AppCompatActivity {
         Dao<Question, Long> questionDao = todoOpenDatabaseHelper.getDao();
 
         Date currDateTime = new Date(System.currentTimeMillis());
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currDateTime);
         calendar.add(Calendar.DATE, 14);
-
         Date dueDate = calendar.getTime();
 
+        //create DB Objects
         try {
             questionDao.create(new Question("Question Example 1", "Question Example 1 Description", currDateTime, dueDate));
             questionDao.create(new Question("Question Example 2", "Question Example 2 Description", currDateTime, dueDate));
@@ -69,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //Logging DB Objects
         for (Question q : questions) {
             Log.i("Question ID", q.getId().toString());
             Log.i("Question question", q.getQuestion());
