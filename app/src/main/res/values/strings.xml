@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Android</string>
-    <string name="hello_world">Hello World!</string>
+    <string name="app_name">MEIS SURVEY</string>
+    <string name="hello_world">Main Menu</string>
     <string name="title_question_list">Questions</string>
     <string name="title_question_detail">Question Detail</string>
     <string name="failed">Failed!</string>
-    <string name="title_activity_test_rest">Start survey</string>
+    <string name="title_activity_test_rest">Choose survey</string>
 </resources>

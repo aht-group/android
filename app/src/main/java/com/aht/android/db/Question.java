@@ -28,6 +28,13 @@ public class Question {
     @DatabaseField
     private Date dueDate;
 
+    //Many_to_One
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "Question")
+    private Survey survey;
+
+    public Survey getSurvey() {return survey;    }
+    public void setSurvey(Survey survey) {this.survey = survey;    }
+
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 
