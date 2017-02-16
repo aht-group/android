@@ -9,16 +9,23 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.aht.android.R;
-import com.aht.android.dummy.Content;
+import com.aht.android.appContent.AppContent;
+import com.aht.android.appContent.AppContent.Item;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.aht.android.appContent.AppContent.ITEM_MAP;
 
 /**
  * An activity representing a list of Questions. This activity
@@ -35,6 +42,11 @@ public class QuestionListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    private EditText editText;
+    private TextView textView;
+    private Map<String, Item> questionList;
+    private Item question;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +77,53 @@ public class QuestionListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+
+        //Initialize GUI Elements
+        editText = (EditText) findViewById(R.id.editTextApp);
+        textView = (TextView) findViewById(R.id.textViewApp);
+
+        //GetQuestionList
+        questionList = ITEM_MAP;
+
     }
 
+
+    //SaveButton
+    public void saveAnswer(View view) {
+        //popup
+        Toast.makeText(this, "Answer saved", Toast.LENGTH_SHORT).show();
+
+        //rootView of the QuestionDetailFragment to insert answers
+        View rootView = view.getRootView();
+        ((TextView) rootView.findViewById(R.id.question_detail)).setText(editText.getText());
+
+        //manipulate item
+//        questionList.get(QuestionDetailFragment.ARG_ITEM_ID).setAnswer(editText.getText().toString());
+        Item i = questionList.get(getQuestion().id);
+        i.setAnswer(editText.getText().toString());
+        questionList.put(i.id, i);
+
+    }
+
+
+    public Item getQuestion() {
+        return question;
+    }
+    public void setQuestion(Item question) {
+        this.question = question;
+    }
+
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Content.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(AppContent.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<Content.Item> mValues;
+        private final List<Item> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<Content.Item> items) {
+        public SimpleItemRecyclerViewAdapter(List<Item> items) {
             mValues = items;
         }
 
@@ -98,6 +145,13 @@ public class QuestionListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
+
+                        //logging IDs
+                        Log.i("ID: ", holder.mItem.id);
+                        //Set selected question
+                        setQuestion(holder.mItem);
+                        Log.i("Set Question: ", getQuestion().id);
+
                         arguments.putString(QuestionDetailFragment.ARG_ITEM_ID, holder.mItem.id);
                         QuestionDetailFragment fragment = new QuestionDetailFragment();
                         fragment.setArguments(arguments);
@@ -124,7 +178,7 @@ public class QuestionListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public Content.Item mItem;
+            public Item mItem;
 
             public ViewHolder(View view) {
                 super(view);
