@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">French Android</string>
     <string name="hello_world">French Hello World!</string>
+    <string name="failed">Failed</string>
+    <string name="title_activity_test_rest">Start</string>
+    <string name="title_question_detail">Question Detail</string>
+    <string name="title_question_list">Questions</string>
 </resources>

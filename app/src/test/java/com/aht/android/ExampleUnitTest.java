@@ -2,6 +2,7 @@ package com.aht.android;
 
 import com.aht.android.rest.RestConnection;
 
+import org.jeesl.model.xml.jeesl.Container;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,6 +20,10 @@ public class ExampleUnitTest {
 
     @Test
     public void HttpConnection() throws Exception {
-//        assertTrue(new RestConnection().connect());
+        RestConnection rc = new RestConnection();
+        rc.connect();
+		Container jaxb = rc.getRest().jaxb();
+        assertTrue(jaxb != null);
+		System.out.println(jaxb.getStatus().get(0).getCode());
     }
 }
