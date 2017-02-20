@@ -21,9 +21,8 @@ public class ExampleUnitTest {
     @Test
     public void HttpConnection() throws Exception {
         RestConnection rc = new RestConnection();
-        rc.connect();
 
-        JsonContainer json = rc.getRest();
+        JsonContainer json = rc.test();
 		Assert.assertEquals("abc", json.getStatus().get(0).getCode());
     }
 }
