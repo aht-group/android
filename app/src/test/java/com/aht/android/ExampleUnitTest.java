@@ -2,9 +2,9 @@ package com.aht.android;
 
 import com.aht.android.rest.RestConnection;
 
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.json.system.status.JsonContainer;
+import org.junit.Assert;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
@@ -22,8 +22,8 @@ public class ExampleUnitTest {
     public void HttpConnection() throws Exception {
         RestConnection rc = new RestConnection();
         rc.connect();
-		Container jaxb = rc.getRest().jaxb();
-        assertTrue(jaxb != null);
-		System.out.println(jaxb.getStatus().get(0).getCode());
+
+        JsonContainer json = rc.getRest();
+		Assert.assertEquals("abc", json.getStatus().get(0).getCode());
     }
 }

@@ -1,29 +1,63 @@
 package com.aht.android.rest;
 
-import org.jboss.resteasy.client.ClientExecutor;
-import org.jboss.resteasy.client.ProxyFactory;
-import org.jboss.resteasy.core.executors.URLConnectionClientExecutor;
+
+import com.google.gson.GsonBuilder;
+
+import org.jeesl.model.json.system.status.JsonContainer;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import rw.gov.loda.meis.interfaces.rest.MeisMobileRest;
 
 public class RestConnection {
 
-    public MeisMobileRest getRest() {
+    public JsonContainer getRest() {
         return rest;
     }
-    private MeisMobileRest rest;
+    private JsonContainer rest;
 
-    public void connect() throws Exception {
+    public void connect() {
 
-		String urlStr = "http://localhost:8080/meis/rest/mobile/jaxb/";
+		String urlStr = "http://localhost:8080/meis/rest/mobile/test/";
 
         if(isInternetAvailable(urlStr))
         {
             try {
-				ClientExecutor executor = new URLConnectionClientExecutor((HttpURLConnection) new URL(urlStr).openConnection());
-                rest = ProxyFactory.create(MeisMobileRest.class,urlStr,executor);
+				HttpURLConnection con = (HttpURLConnection) new URL(urlStr).openConnection();
+				con.setRequestMethod("GET");
+
+				InputStream in = new BufferedInputStream(con.getInputStream());
+				String response;
+				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+				StringBuilder sb = new StringBuilder();
+				try {
+					while ((response = reader.readLine()) != null) {
+						sb.append(response).append('\n');
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						in.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				System.out.println(sb.toString());
+
+
+				GsonBuilder gsonBuilder = new GsonBuilder();
+				gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+				rest = gsonBuilder.create().fromJson(sb.toString(), JsonContainer.class);
+//				System.out.println(rest.getStatus().get(0).getCode());
+
+////                //Connection for RestEasy & Jaxb Only works Api 24+
+//				ClientExecutor executor = new URLConnectionClientExecutor((HttpURLConnection) new URL(urlStr).openConnection());
+//                rest = ProxyFactory.create(MeisMobileRest.class,urlStr,executor);
             }
             catch (Exception e) {
 				e.printStackTrace();
