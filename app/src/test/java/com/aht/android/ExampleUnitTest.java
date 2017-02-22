@@ -2,8 +2,10 @@ package com.aht.android;
 
 import com.aht.android.rest.RestConnection;
 
+import org.jeesl.model.json.survey.Survey;
 import org.jeesl.model.json.system.status.JsonContainer;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -25,4 +27,14 @@ public class ExampleUnitTest {
         JsonContainer json = rc.test();
 		Assert.assertEquals("abc", json.getStatus().get(0).getCode());
     }
+
+	@Test @Ignore
+	public void testSurveyStructure()
+	{
+		RestConnection rc = new RestConnection();
+
+//		Survey s = rc.getSurveyStructure("en/4",false);
+//		Assert.assertEquals(6,s.getTemplate().getSections().size());
+	}
+
 }

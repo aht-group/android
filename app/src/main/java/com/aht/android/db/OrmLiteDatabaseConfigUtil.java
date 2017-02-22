@@ -51,7 +51,7 @@ public class OrmLiteDatabaseConfigUtil extends OrmLiteConfigUtil {
         File configFile = new File(fullConfigPath);
 
         /**
-         * In the a scenario where we run this program serveral times, it will recreate the
+         * In the a scenario where we run this program several times, it will recreate the
          * configuration file each time with the updated configurations.
          */
         if(configFile.exists()) {

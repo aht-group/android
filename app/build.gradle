@@ -56,13 +56,13 @@ dependencies {
         gradle: 'groupId:artifactId:version'
     */
     compile 'com.google.code.gson:gson:2.4'
-// //   compile 'com.loopj.android:android-async-http:1.4.9'
+//    compile 'com.loopj.android:android-async-http:1.4.9'
 //    compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.rldsf:meis-interfaces:1.0.01-SNAPSHOT'
     compile 'org.rldsf:meis-xml:1.0.01-SNAPSHOT'
     compile 'org.jeesl:jeesl-xml:0.2.6-SNAPSHOT'
 //    compile 'net.sf.exlp:exlp-util:0.1.12-SNAPSHOT'
 
-        compile 'com.j256.ormlite:ormlite-core:4.48'
+    compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
 }

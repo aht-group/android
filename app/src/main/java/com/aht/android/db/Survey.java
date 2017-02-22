@@ -15,6 +15,13 @@ public class Survey {
     @DatabaseField(generatedId = true)
     private Long id;
 
+	/** systemId represents the ID given from main system*/
+    @DatabaseField
+    private Long systemId;
+
+    @DatabaseField
+    private String name;
+
     //Many_to_One
     @ForeignCollectionField
     Collection<Question> ql;

@@ -13,12 +13,12 @@ public class AppContent {
     /**
      * An array of sample items.
      */
-    public static final List<Item> ITEMS = new ArrayList<Item>();
+    public static final List<Item> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample items, by ID.
      */
-    public static final Map<String, Item> ITEM_MAP = new HashMap<String, Item>();
+    public static final Map<String, Item> ITEM_MAP = new HashMap<>();
 
     private static final int COUNT = 25;
 

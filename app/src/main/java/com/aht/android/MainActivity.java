@@ -2,25 +2,32 @@ package com.aht.android;
 
 import android.content.Intent;
 import android.database.SQLException;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.aht.android.db.DatabaseHelper;
 import com.aht.android.db.Question;
 import com.aht.android.masterDetail.*;
+import com.aht.android.rest.RestConnection;
+import com.aht.android.rest.RestResultReceiver;
+import com.aht.android.rest.TestRestActivity;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+
+import org.jeesl.model.json.survey.Survey;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RestResultReceiver.Receiver{
 
-    public static final String EXTRA = "nix.Extra";
+    public static String EXTRA = "nix.Extra";
     private List<Question> questions;
 
     @Override
@@ -37,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -68,37 +74,55 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Logging DB Objects
-        for (Question q : questions) {
-            Log.i("Question ID", q.getId().toString());
-            Log.i("Question question", q.getQuestion());
-            Log.i("Question Answer", q.getAnswer());
-            Log.i("Question current Date", q.getDateCreated().toString());
-            Log.i("Question DueDate", q.getDueDate().toString());
-            Log.i("DB Path", String.valueOf(getDatabasePath("question")));
-        }
+//        for (Question q : questions) {
+//            Log.i("Question ID", q.getId().toString());
+//            Log.i("Question question", q.getQuestion());
+//            Log.i("Question Answer", q.getAnswer());
+//            Log.i("Question current Date", q.getDateCreated().toString());
+//            Log.i("Question DueDate", q.getDueDate().toString());
+//            Log.i("DB Path", String.valueOf(getDatabasePath("question")));
+//        }
     }
 
     public void testRest(View view) throws Exception {
-//        RestConnection rc = new RestConnection();
-//        rc.connect();
-//        rc.saveProjectStatus();
-//
-//        if(new File(RestConnection.HOME_DIR + RestConnection.FS + "status.xml").exists())
-//        {
-//            Intent intent = new Intent(this, TestRestActivity.class);
-//            intent.putExtra(EXTRA,/*rc.loadProjectStatus().get(0).getCode()*/ "Test");
-//            startActivity(intent);
-//        }
-//        else
-//        {
-//            TextView textView = (TextView)findViewById(R.id.textView);
-//            textView.setText(R.string.failed);
-//        }
+
+		Log.i("testRest", "Start REST test...");
+		RestResultReceiver rr =  new RestResultReceiver(new Handler());
+		rr.setReceiver(this);
+        Intent intent = new Intent(this, RestConnection.class);
+        intent.putExtra("relativeUrl", "/json/structure/en/4");
+        intent.putExtra("post", false);
+        intent.putExtra("receiver", rr);
+        startService(intent);
     }
 
     public void startSurvey(View view) {
         startActivity(new Intent(getApplicationContext(), QuestionListActivity.class));
     }
 
-
+	@Override
+	public void onReceiveResult(int resultCode, Bundle resultData) {
+		switch (resultCode) {
+			case RestConnection.FINISH:
+				Survey survey = (Survey) resultData.get("Survey");
+				Log.i("Result FINISH", "Connection successful!");
+				if(survey != null)
+				{
+					Intent intentTA = new Intent(this, TestRestActivity.class);
+					intentTA.putExtra(EXTRA,survey.getTemplate().getSections().get(0).getQuestions().get(0).getQuestion()/*"Connection successful!"*/);
+					startActivity(intentTA);
+				}
+				else
+				{
+					TextView textView = (TextView)findViewById(R.id.textView);
+					textView.setText(R.string.failed);
+				}
+				break;
+			case RestConnection.ERROR:
+				Log.i("Result ERROR", "Connection failed!");
+				TextView textView = (TextView)findViewById(R.id.textView);
+				textView.setText(resultData.getString("Error"));
+				break;
+		}
+	}
 }

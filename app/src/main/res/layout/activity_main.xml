@@ -22,7 +22,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="202dp"
-        android:id="@+id/button"
+        android:id="@+id/surveyButton"
         android:text="@string/title_activity_test_rest"
         android:onClick="startSurvey"
         android:layout_below="@+id/textView"
@@ -32,22 +32,23 @@
         android:layout_marginEnd="163dp" />
 
     <Button
-        android:text="XYZ"
+        android:text="Test rest"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/button"
+        android:layout_alignBottom="@+id/surveyButton"
         android:layout_toRightOf="@+id/textView"
         android:layout_marginLeft="197dp"
         android:layout_marginStart="197dp"
+        android:onClick="testRest"
         android:id="@+id/button3" />
 
     <Button
         android:text="XYZ"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
+        android:layout_below="@+id/surveyButton"
+        android:layout_alignLeft="@+id/surveyButton"
+        android:layout_alignStart="@+id/surveyButton"
         android:layout_marginTop="148dp"
         android:id="@+id/button4" />
 

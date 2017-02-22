@@ -35,7 +35,10 @@
             android:label="@string/title_activity_test_rest"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".HouseHolds" />
-        <activity android:name=".SurveyOptions"></activity>
+        <activity android:name=".SurveyOptions"/>
+
+        <service android:name=".rest.RestConnection"
+                 android:exported="false" />
     </application>
 
 </manifest>
