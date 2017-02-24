@@ -20,21 +20,12 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-    @Test
+    @Test @Ignore
     public void HttpConnection() throws Exception {
         RestConnection rc = new RestConnection();
 
         JsonContainer json = rc.test();
 		Assert.assertEquals("abc", json.getStatus().get(0).getCode());
     }
-
-	@Test @Ignore
-	public void testSurveyStructure()
-	{
-		RestConnection rc = new RestConnection();
-
-//		Survey s = rc.getSurveyStructure("en/4",false);
-//		Assert.assertEquals(6,s.getTemplate().getSections().size());
-	}
 
 }

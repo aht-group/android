@@ -1,5 +1,9 @@
 package com.aht.android.appContent;
 
+import com.aht.config.tables.Question;
+import com.aht.config.tables.Section;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,18 +15,29 @@ import java.util.Map;
 public class AppContent {
 
     /**
-     * An array of sample items.
+     * An array of sample items for test purposes.
      */
     public static final List<Item> ITEMS = new ArrayList<>();
 
+	/**
+	 * A map of sample items, by ID.
+	 */
+	public static final Map<String, Item> ITEM_MAP = new HashMap<>();
+
     /**
-     * A map of sample items, by ID.
+     * An array of questions.
      */
-    public static final Map<String, Item> ITEM_MAP = new HashMap<>();
+    private final List<Question> questions = new ArrayList<>();
 
     private static final int COUNT = 25;
 
-    static {
+	private Section section;
+
+	public AppContent(Section section) {
+		this.section = section;
+	}
+
+	static {
         // Add some items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
@@ -46,6 +61,10 @@ public class AppContent {
         }
         return builder.toString();
     }
+
+	private void addQuestions() {
+		questions.addAll(section.getQuestions());
+	}
 
     /**
      * A item representing a piece of question.

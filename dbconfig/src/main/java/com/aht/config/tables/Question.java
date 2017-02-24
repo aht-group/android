@@ -1,9 +1,11 @@
-package com.aht.android.db;
+package com.aht.config.tables;
 
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.stmt.query.In;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -23,8 +25,6 @@ public class Question {
 	@DatabaseField private String code;
 
     @DatabaseField private String question;
-
-    @DatabaseField private String answer;
 
     @DatabaseField private Date dateCreated;
 
@@ -59,11 +59,14 @@ public class Question {
 	@DatabaseField private boolean visible;
 
     //Many_to_One
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "Question")
-    private Survey survey;
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    private Section section;
 
-    public Survey getSurvey() {return survey;    }
-    public void setSurvey(Survey survey) {this.survey = survey;    }
+	@ForeignCollectionField
+	private Collection<Answer> answers;
+
+    public Section getSurvey() {return section;    }
+    public void setSurvey(Section survey) {this.section = survey;    }
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
@@ -71,8 +74,11 @@ public class Question {
     public String getQuestion() {return question;}
     public void setQuestion(String question) {this.question = question;}
 
-    public String getAnswer() {return answer;}
-    public void setAnswer(String answer) {this.answer = answer;}
+    public Collection<Answer> getAnswers() {
+		if(answers == null) return new ArrayList<>();
+		return answers;
+	}
+    public void setAnswer(Collection<Answer> answers) {this.answers = answers;}
 
     public Date getDateCreated() {return dateCreated;}
     public void setDateCreated(Date dateCreated) {this.dateCreated = dateCreated;}
@@ -81,9 +87,9 @@ public class Question {
     public void setDueDate(Date dueDate) {this.dueDate = dueDate;}
 
 
-    public Question(String question, String answer, Date dateCreated, Date dueDate) {
+    public Question(String question, Collection<Answer> answers, Date dateCreated, Date dueDate) {
         this.question = question;
-        this.answer = answer;
+        this.answers = answers;
         this.dateCreated = dateCreated;
         this.dueDate = dueDate;
     }

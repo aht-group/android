@@ -5,4 +5,5 @@
     <string name="title_question_detail">Question Detail</string>
     <string name="failed">Failed!</string>
     <string name="title_activity_test_rest">Choose survey</string>
+    <string name="title_activity_select">SelectActivity</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.aht.android.db;
+package com.aht.config.tables;
 
 import com.j256.ormlite.field.DatabaseField;
 

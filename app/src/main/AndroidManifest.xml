@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aht.android">
+          package="com.aht.android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -12,15 +12,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".masterDetail.QuestionListActivity"
             android:label="@string/title_question_list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".masterDetail.QuestionDetailActivity"
             android:label="@string/title_question_detail"
@@ -28,17 +28,24 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aht.android.masterDetail.QuestionListActivity" />
+                android:value="com.aht.android.masterDetail.QuestionListActivity"/>
         </activity>
         <activity
             android:name=".rest.TestRestActivity"
             android:label="@string/title_activity_test_rest"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".HouseHolds" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".HouseHolds"/>
         <activity android:name=".SurveyOptions"/>
 
-        <service android:name=".rest.RestConnection"
-                 android:exported="false" />
+        <service
+            android:name=".rest.RestConnection"
+            android:exported="false"/>
+
+        <activity
+            android:name=".SelectActivity"
+            android:label="@string/title_activity_select"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

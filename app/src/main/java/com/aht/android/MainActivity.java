@@ -3,7 +3,6 @@ package com.aht.android;
 import android.content.Intent;
 import android.database.SQLException;
 import android.os.Handler;
-import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aht.android.db.DatabaseHelper;
-import com.aht.android.db.Question;
+import com.aht.config.tables.Question;
 import com.aht.android.masterDetail.*;
 import com.aht.android.rest.RestConnection;
 import com.aht.android.rest.RestResultReceiver;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements RestResultReceive
         //ORMLite
         try {
 
-            testOutOrmLiteDatabase();
+//            testOutOrmLiteDatabase();
             createQuestionMap();
 
         } catch (SQLException e) {
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements RestResultReceive
         DatabaseHelper todoOpenDatabaseHelper = OpenHelperManager.getHelper(this,
                 DatabaseHelper.class);
 
-        Dao<Question, Long> questionDao = todoOpenDatabaseHelper.getDao();
+        Dao<Question, Long> questionDao = todoOpenDatabaseHelper.getQuestionDao();
 
         Date currDateTime = new Date(System.currentTimeMillis());
         Calendar calendar = Calendar.getInstance();
@@ -65,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements RestResultReceive
 
         //create DB Objects
         try {
-            questionDao.create(new Question("Question Example 1", "Question Example 1 Description", currDateTime, dueDate));
-            questionDao.create(new Question("Question Example 2", "Question Example 2 Description", currDateTime, dueDate));
-            questionDao.create(new Question("Question Example 3", "Question Example 3 Description", currDateTime, dueDate));
+            questionDao.create(new Question("Question Example 1",null, currDateTime, dueDate));
+            questionDao.create(new Question("Question Example 2",null,  currDateTime, dueDate));
+            questionDao.create(new Question("Question Example 3",null, currDateTime, dueDate));
             questions = questionDao.queryForAll();
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements RestResultReceive
         intent.putExtra("relativeUrl", "/json/structure/en/4");
         intent.putExtra("post", false);
         intent.putExtra("receiver", rr);
+		intent.putExtra("testMode", "Test");
         startService(intent);
     }
 
@@ -103,13 +103,14 @@ public class MainActivity extends AppCompatActivity implements RestResultReceive
 	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
 		switch (resultCode) {
-			case RestConnection.FINISH:
+			case RestConnection.TEST_FINISH:
 				Survey survey = (Survey) resultData.get("Survey");
-				Log.i("Result FINISH", "Connection successful!");
+				Log.i("Result TEST_FINISH", "Connection successful!");
 				if(survey != null)
 				{
 					Intent intentTA = new Intent(this, TestRestActivity.class);
 					intentTA.putExtra(EXTRA,survey.getTemplate().getSections().get(0).getQuestions().get(0).getQuestion()/*"Connection successful!"*/);
+					intentTA.putExtra("bundle", resultData);
 					startActivity(intentTA);
 				}
 				else
@@ -118,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements RestResultReceive
 					textView.setText(R.string.failed);
 				}
 				break;
-			case RestConnection.ERROR:
-				Log.i("Result ERROR", "Connection failed!");
+			case RestConnection.TEST_ERROR:
+				Log.i("Result TEST_ERROR", "Connection failed!");
 				TextView textView = (TextView)findViewById(R.id.textView);
 				textView.setText(resultData.getString("Error"));
 				break;

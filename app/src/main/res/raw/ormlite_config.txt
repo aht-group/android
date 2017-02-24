@@ -1,8 +1,60 @@
 #
-# generated on 2017/02/21 03:54:09
+# generated on 2017/02/24 02:13:56
 #
 # --table-start--
-dataClass=com.aht.android.db.Question
+dataClass=com.aht.config.tables.Answer
+tableName=answer
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=integerAnswer
+# --field-end--
+# --field-start--
+fieldName=textAnswer
+# --field-end--
+# --field-start--
+fieldName=remark
+# --field-end--
+# --field-start--
+fieldName=doubleAnswer
+# --field-end--
+# --field-start--
+fieldName=score
+# --field-end--
+# --field-start--
+fieldName=booleanAnswer
+# --field-end--
+# --field-start--
+fieldName=question
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=hh
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.aht.config.tables.HouseHolds
+tableName=households
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.aht.config.tables.Question
 tableName=question
 # --table-fields-start--
 # --field-start--
@@ -10,10 +62,13 @@ fieldName=id
 generatedId=true
 # --field-end--
 # --field-start--
-fieldName=question
+fieldName=systemId
 # --field-end--
 # --field-start--
-fieldName=answer
+fieldName=code
+# --field-end--
+# --field-start--
+fieldName=question
 # --field-end--
 # --field-start--
 fieldName=dateCreated
@@ -22,10 +77,98 @@ fieldName=dateCreated
 fieldName=dueDate
 # --field-end--
 # --field-start--
-fieldName=survey
-columnName=Question
+fieldName=position
+# --field-end--
+# --field-start--
+fieldName=remark
+# --field-end--
+# --field-start--
+fieldName=minScore
+# --field-end--
+# --field-start--
+fieldName=maxScore
+# --field-end--
+# --field-start--
+fieldName=calcScore
+# --field-end--
+# --field-start--
+fieldName=showInteger
+# --field-end--
+# --field-start--
+fieldName=showText
+# --field-end--
+# --field-start--
+fieldName=showRemark
+# --field-end--
+# --field-start--
+fieldName=showDouble
+# --field-end--
+# --field-start--
+fieldName=showScore
+# --field-end--
+# --field-start--
+fieldName=showBoolean
+# --field-end--
+# --field-start--
+fieldName=showSelectOne
+# --field-end--
+# --field-start--
+fieldName=showSelectMulti
+# --field-end--
+# --field-start--
+fieldName=visible
+# --field-end--
+# --field-start--
+fieldName=section
 foreign=true
 foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=answers
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.aht.config.tables.Section
+tableName=section
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=systemId
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=questions
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.aht.config.tables.Survey
+tableName=survey
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=systemId
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=sections
+foreignCollection=true
 # --field-end--
 # --table-fields-end--
 # --table-end--

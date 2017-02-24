@@ -25,9 +25,9 @@
         android:id="@+id/surveyButton"
         android:text="@string/title_activity_test_rest"
         android:onClick="startSurvey"
-        android:layout_below="@+id/textView"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView"
+        android:layout_below="@id/textView"
+        android:layout_toLeftOf="@id/textView"
+        android:layout_toStartOf="@id/textView"
         android:layout_marginRight="163dp"
         android:layout_marginEnd="163dp" />
 
@@ -35,8 +35,8 @@
         android:text="Test rest"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/surveyButton"
-        android:layout_toRightOf="@+id/textView"
+        android:layout_alignBottom="@id/surveyButton"
+        android:layout_toRightOf="@id/textView"
         android:layout_marginLeft="197dp"
         android:layout_marginStart="197dp"
         android:onClick="testRest"
@@ -46,9 +46,9 @@
         android:text="XYZ"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/surveyButton"
-        android:layout_alignLeft="@+id/surveyButton"
-        android:layout_alignStart="@+id/surveyButton"
+        android:layout_below="@id/surveyButton"
+        android:layout_alignLeft="@id/surveyButton"
+        android:layout_alignStart="@id/surveyButton"
         android:layout_marginTop="148dp"
         android:id="@+id/button4" />
 
@@ -57,8 +57,8 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:id="@+id/button5"
-        android:layout_alignBaseline="@+id/button4"
-        android:layout_alignBottom="@+id/button4"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3" />
+        android:layout_alignBaseline="@id/button4"
+        android:layout_alignBottom="@id/button4"
+        android:layout_alignLeft="@id/button3"
+        android:layout_alignStart="@id/button3" />
 </RelativeLayout>

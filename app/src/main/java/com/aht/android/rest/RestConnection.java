@@ -26,6 +26,8 @@ public class RestConnection extends IntentService {
 
 	public static final int FINISH = 0;
 	public static final int ERROR = -1;
+	public static final int TEST_FINISH = 10;
+	public static final int TEST_ERROR = -11;
 
 	public static final String BASE_URL = "http://10.0.2.2:8080/meis/rest/mobile";
 
@@ -47,11 +49,15 @@ public class RestConnection extends IntentService {
 			if(isr != null) {
 				Log.i("RestConnection","InputStream received.");
 				bundle.putSerializable("Survey", getSurveyStructure(isr));
+				if(intent.hasExtra("testMode"))
+					receiver.send(TEST_FINISH, bundle);
 				receiver.send(FINISH, bundle);
 			}
 		}
 		catch (Exception ex) {
 			bundle.putString("Error", ex.getMessage());
+			if(intent.hasExtra("testMode"))
+				receiver.send(TEST_ERROR, bundle);
 			receiver.send(ERROR, bundle);
 		}
 	}
